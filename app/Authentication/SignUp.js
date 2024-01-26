@@ -7,13 +7,12 @@ import axios from "axios";
 import { Link, useRouter } from "expo-router";
 import { useState } from "react";
 
-const API_URL ="https://api.schoolflow.rw/Authentication/createAccount.php"
+const API_URL ="https://hoseventuresapi.verta.rw/Authentication/createAccount.php"
 
 const SignUp = () => {
   const router=useRouter();
 
-  const [fname,setFname]=useState('');
-  const [lname,setLname]=useState('');
+  const [fullname,setFname]=useState('');
   const [phone,setPhone]=useState('');
   const [email,setEmail]=useState('');
   const [password,setPassword]=useState('');
@@ -28,15 +27,14 @@ const SignUp = () => {
     if(password != coPassword){
       setResponseMessage("password not matching");
       // Alert.alert("password not matching");
-    }else if(!fname || !lname || !phone || !email || !password || !coPassword ){
+    }else if(!fullname || !phone || !email || !password || !coPassword ){
       setResponseMessage("All inputs are required");
       // Alert.alert("All inputs are required");
     }else{
 try{
   setLoading(true);
       const response = await axios.post(API_URL, {
-        fname:fname,
-          lname:lname,
+        fullname:fullname,
           phone:phone,
           email:email,
           password:password
