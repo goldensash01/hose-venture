@@ -47,7 +47,7 @@ const Login = () => {
       setResponseMessage("Password required");
     } else {
       try {
-        setLoading(true); // Set loading to true when login starts
+        setLoading(true); // Set loading to true when login starts 
         const response = await axios.post(API_URL, {
           emailPhone: emailOrPhone,
           password: password,
