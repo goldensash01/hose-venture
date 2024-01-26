@@ -8,7 +8,7 @@ import axios from "axios";
 
 import { Link, Redirect, useRouter } from "expo-router";
 
-const API_URL="https://api.schoolflow.rw/Authentication/Login.php";
+const API_URL="https://hoseventuresapi.verta.rw/Authentication/Login.php";
 
 
 const Login = () => {
@@ -56,7 +56,7 @@ const Login = () => {
           if (parentId !== null) {
             getUserId();
           } else {
-            await AsyncStorage.setItem('userId', response.data.data.parentId);
+            await AsyncStorage.setItem('userId', response.data.data.UserId);
             await AsyncStorage.setItem('token', response.data.data.UniqueId);
           }
           setResponseMessage("Login successful");
@@ -121,7 +121,7 @@ const Login = () => {
         
         <View>
            
-        {loading ?  <ActivityIndicator style={styles.ActivityIndicatorStyle}size="large" color="#47B84D" /> :  <CustomButton onPress={()=>router.replace("Home/HomePage/")} buttonName="Login" /> }
+        {loading ?  <ActivityIndicator style={styles.ActivityIndicatorStyle}size="large" color="#47B84D" /> :  <CustomButton onPress={LoginUser} buttonName="Login" /> }
         {/* {loading ?  <ActivityIndicator style={styles.ActivityIndicatorStyle}size="large" color="#47B84D" /> :  <CustomButton onPress={LoginUser} buttonName="Login" /> } */}
         </View>
         <View style={styles.HaveAccountText}>
