@@ -23,7 +23,7 @@ export default function Account() {
   const router = useRouter();
   const [profileInfo, setProfileInfo] = useState([]);
   const [redirectLoading, setRedirectLoading] = useState(true);
-  // const [parentId, setParentId] = useState(null);
+  // const [parentId, setParentId] = useState(null);  // Initialize parentId as null
   const [loading, setLoading] = useState(false);
   const [username, setUsername] = useState('Golden Sash');
 
@@ -51,11 +51,11 @@ export default function Account() {
     try {
       setLoading(true);
       const Response = await axios.post(PROFILE_INFO, {
-        userid: parentId,
+        userId: parentId,
       });
       if (Response.status == 200) {
         setProfileInfo(Response.data.data);
-        // console.log(Response.data.data);
+        console.log(Response.data.data);
       } else {
         setProfileInfo(null);
         Alert.alert("no data found");
@@ -69,6 +69,7 @@ export default function Account() {
   };
   useEffect(() => {
     GetUserInfo();
+    console.log(parentId)
   }, [parentId]);
   return (
     (  loading?<ActivityIndicator/>:

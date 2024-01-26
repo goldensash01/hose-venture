@@ -7,10 +7,5 @@ export default ()=>{
         headerShown:false,
         }}
         />
-        <Stack.Screen 
-        name="ViewMore" options={{
-        headerShown:false,
-        }}
-        />
     </Stack> 
 }

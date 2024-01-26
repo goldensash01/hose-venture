@@ -121,7 +121,7 @@ const Login = () => {
         
         <View>
            
-        {loading ?  <ActivityIndicator style={styles.ActivityIndicatorStyle}size="large" color="#47B84D" /> :  <CustomButton onPress={LoginUser} buttonName="Login" /> }
+        {loading ?  <ActivityIndicator style={styles.ActivityIndicatorStyle}size="large" color="#D43E27" /> :  <CustomButton onPress={LoginUser} buttonName="Login" /> }
         {/* {loading ?  <ActivityIndicator style={styles.ActivityIndicatorStyle}size="large" color="#47B84D" /> :  <CustomButton onPress={LoginUser} buttonName="Login" /> } */}
         </View>
         <View style={styles.HaveAccountText}>
@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
   },
   successMessageContainer: {
     width:'80%',
-    backgroundColor: "green",
+    backgroundColor: "#D43E27",
     padding: 10,
     borderRadius: 10,
     marginTop: 10,
