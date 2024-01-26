@@ -1,7 +1,7 @@
-import { View, Text, StyleSheet, ScrollView, ActivityIndicator } from 'react-native'
+import { View, Text, StyleSheet, ScrollView, ActivityIndicator, Image } from 'react-native'
 import React, { useState,useEffect } from 'react'
 import axios from 'axios';
-import { Link, useRouter, Redirect, router, useLocalSearchParams } from "expo-router";
+import { useRouter,  useLocalSearchParams } from "expo-router";
 import { FontAwesome } from '@expo/vector-icons';
 import ButtonRed from '../../../components/Buttons/buttonRed';
 
@@ -17,21 +17,20 @@ export default function ItemDetails() {
   const [loading, setLoading] = useState(false);
   const {StudentId,ParentId}=useLocalSearchParams();
 
-  const DeleteChild = async ()=>{
-    try{
-    const response= await axios.post(REMOVE_CHILD,{
-      userid: ParentId,
-      childId: StudentId,
-    });
-    if (response.status == 204) {
-      router.replace("Home/HomePage/");
-    } else {
-      Alert.alert("Student Not Removed");
-    }
-      }catch(error){
-        console.log(error)
-      }
-  }
+  // const DeleteChild = async ()=>{
+  //   try{
+  //   const response= await axios.post(GET_HOUSE,{
+  //     houseId:9
+  //   });
+  //   if (response.status == 204) {
+  //     // router.replace("Home/HomePage/");
+  //   } else {
+  //     Alert.alert("Student Not Removed");
+  //   }
+  //     }catch(error){
+  //       console.log(error)
+  //     }
+  // }
 
 
 
@@ -39,60 +38,70 @@ export default function ItemDetails() {
     try {
       setLoading(true);
       const response = await axios.post(GET_HOUSE, {
-        HouseId: 9,
+        houseId: 1,
         // childId: StudentId,
       });
       if (response.status === 200) {
         // console.log(response.data);
         setHouseData(response.data.data);
-        // console.log(childDetails);
+
+        console.log(houseData);
       } else {
         Alert.alert("no data found");
       }
     } catch (error) {
       console.log(error);
       console.log(ParentId);
-      router.replace("Home/HomePage/");
+      // router.replace("Home/HomePage/");
     } finally {
       setLoading(false);
     }
   };
   useEffect(() => {
-    // getChildDetails();
+    getSingleHouse();
   }, []);
   return (
-    
+    // <View></View>
     <ScrollView>
       {loading ? (
-      <ActivityIndicator size="large" color="#47B84D" />
+      <ActivityIndicator size="large" color="#CF0404" />
     ) : (
-      childDetails.map((item) => (
-      <View key={item.studentId}>
+      // houseData[0].map((item) => (
+      <View>
         <View>
-          <Text style={styles.mychildrenTitle} >My Children</Text>
+          <View style={styles.imageDetails}><Text>hihi</Text></View>
+        <Image
+            source={{uri:`https://hoseventuresapi.verta.rw/images/houses/1.jpg`}}
+            style={styles.houseImageTitle}
+            />
         </View>
-        <View style={styles.ScrollViewContiner}>
-          <View>
-          <FontAwesome name="user-circle" size={50} color="#47B84D" />
-          </View>
-          <View >
-            <Text style={styles.SchoolName}>{item.schoolName}</Text>
-          </View>
+        <ScrollView horizontal={true} style={styles.ScrollViewContiner}>
+          <View style={styles.imageContainer}></View>
+          <View style={styles.imageContainer}></View>
+          <View style={styles.imageContainer}></View>
+          <View style={styles.imageContainer}></View>
+        </ScrollView>
+
+        <View style={styles.HouseDetailsRow}>
+          <View style={styles.HouseDetails}></View>
+          <View style={styles.HouseDetails}></View>
+          <View style={styles.HouseDetails}></View>
         </View>
-        
-        <View style={styles.StudentDetailsContainer}>
-            <Text style={styles.StudentNames}>Names: {item.fName} {item.lName}</Text>
-            <Text style={styles.StudentDetails}>Student ID: {item.studentSchoolId}</Text>
-            <Text style={styles.StudentDetails}>Trade: {item.trade}</Text>
-            <Text style={styles.StudentDetails}>Gender: {item.Gender}</Text>
+
+        <View>
+          <Text>{houseData.Title}</Text>
+          <Text>{houseData.Description}</Text>
         </View>
-        
+        <View>
+          <Text>Ratings</Text>
+        </View>
+              
         <View style={styles.buttonsContainer}>
-          <ButtonRed buttonName="REMOVE STUDENT" onPress={DeleteChild}/>
+          <ButtonRed buttonName="REMOVE STUDENT" onPress={()=>console.log('hii')}/>
           <Text style={styles.BackBtn} onPress={()=>router.back()}>Home</Text>
         </View>
       </View>
-      ))
+      // ))
       )}
     </ScrollView>
     
@@ -101,18 +110,17 @@ export default function ItemDetails() {
 
 const styles = StyleSheet.create({
   ScrollViewContiner: {
-    justifyContent: "center",
-    alignItems: "center",
+    padding:10,
   },
   StudentNames:{
     padding:5,
     textTransform:'capitalize',
   },
-  mychildrenTitle: {
-    textAlign: "center",
-    fontSize: 24,
-    padding: 10,
-    fontWeight: "bold",
+  houseImageTitle: {
+    height:380,
+    borderBottomRightRadius: 100,
+    objectFit:'cover',
+    backgroundColor:'silver'
   },
   SchoolName:{
     fontSize:16,
@@ -139,5 +147,36 @@ const styles = StyleSheet.create({
     fontWeight:'bold',
     fontSize:16,
     padding:10
+  },
+  imageDetails:{
+    position:'absolute',
+    zIndex:1,
+    backgroundColor:'red',
+    bottom:0,
+    height:'30%',
+    width:'60%',
+    borderTopRightRadius:20,
+    borderBottomRightRadius:20,
+  },
+  imageContainer:{
+    width:100,
+    height:70,
+    marginHorizontal:10,
+    borderRadius:10,
+    backgroundColor:'green'
+  },
+  HouseDetails:{
+    width:80,
+    height:50,
+    // marginHorizontal:10,
+    // borderRadius:10,
+    backgroundColor:'green'
+  },
+  HouseDetailsRow:{
+    borderRadius:20,
+    display:'flex',
+    justifyContent:'center',
+    alignItems:'center',
+    flexDirection:'row'
   }
 });

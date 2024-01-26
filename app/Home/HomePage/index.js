@@ -2,12 +2,19 @@ import {
   StyleSheet,
   Text,
   View,
+  ScrollView,
   Pressable,
   FlatList,
+  Alert,
+  ActivityIndicator,
   RefreshControl
 } from "react-native";
+// import Navigation from "../../../components/Navigation/navigation";
 import House from "../../../components/recentHouses/House";
+// import AddChild from "../../../components/childrens/AddChild";
 import { Link, useRouter, Redirect, useLocalSearchParams } from "expo-router";
+import NotificationContainer from "../../../components/Notifications/NotificationContainer";
+import { StatusBar } from "expo-status-bar";
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
@@ -25,7 +32,9 @@ GET_ALL_HOUSES = "https://hoseventuresapi.verta.rw/houses/houseDetails.php";
 const HomePage = () => {
   const router = useRouter();
   const {LoginUserId}=useLocalSearchParams();
+
   
+
   const [redirectLoading, setRedirectLoading] = useState(true);
   const [fetchRecentHouses, setFetchRecentHouses] = useState([]);
   const [allHouses, setAllHouses] = useState([]);
@@ -142,7 +151,7 @@ const HomePage = () => {
                       keyExtractor={(item) => item.HouseId.toString()}
                       renderItem={({ item }) => (
                         <House
-                          houseImage={item.HouseImg?item.HouseImg:'notFound.png'}
+                          houseImage={item.HouseImg}
                           housePrice={item.Price}
                           Location={item.Location}
                           rating={item.Rating}
@@ -150,7 +159,7 @@ const HomePage = () => {
                           Title={item.Title}
                           onPress={() =>
                             router.push(
-                              `Home/HomePage/ChildDetails?HouseId=${item.HouseId}`
+                              `Home/HomePage/itemDetails?HouseId=${item.HouseId}`
                             )
                           }
                         />
@@ -176,7 +185,7 @@ const HomePage = () => {
                     keyExtractor={(item) => item.HouseId.toString()}
                     renderItem={({ item }) => (
                       <HouseRow
-                        houseImage={item.HouseImg?item.HouseImg:'notFound.png'}
+                        houseImage={item.HouseImg}
                         housePrice={item.Price}
                         Location={item.Location}
                         rating={item.Rating}
@@ -184,7 +193,7 @@ const HomePage = () => {
                         Title={item.Title}
                         onPress={() =>
                           router.push(
-                            `Home/HomePage/ChildDetails?HouseId=${item.HouseId}`
+                            `Home/HomePage/itemDetails?HouseId=${item.HouseId}`
                           )
                         }
                       />

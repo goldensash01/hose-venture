@@ -23,12 +23,6 @@ export default ()=>{
             // title:null     
             headerShown:false,
     }}/>
-        <Stack.Screen name="AddStudent" 
-        options={{
-            headerLeft:()=>(<Ionicons name="ios-chevron-back-outline" size={24} color="black" onPress={()=>router.back()}/>),
-            title:'Add Student',
-            presentation:'modal',
-            headerShown:false,
-    }}/>
+        
     </Stack> )
 }
