@@ -6,7 +6,7 @@ export default function House({Title,Location,houseImage,housePrice,rating,onPre
   const router = useRouter();
   return (
     <View>
-      <Pressable onPress={()=>router.push('/Home/HomePage/itemDetails')} style={styles.childComponentCont}>
+      <Pressable onPress={onPress} style={styles.childComponentCont}>
         <View>
         <Image
             source={{uri:`https://hoseventuresapi.verta.rw/images/houses/${houseImage}`}}

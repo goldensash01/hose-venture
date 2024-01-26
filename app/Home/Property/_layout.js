@@ -6,10 +6,6 @@ export default ()=>{
             headerShown:false,
         }}
         />
-        <Stack.Screen name="childDetailedAttendance"
-        options={{
-            headerShown:false,
-        }}
-        />
+       
     </Stack> 
 }
