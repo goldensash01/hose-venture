@@ -171,9 +171,13 @@ const styles = StyleSheet.create({
     objectFit:'contain',
   },
   Title:{
+    textAlign:'center',
     fontWeight:'bold',
-    fontSize:20,
-    padding:10
+    fontSize:24,
+    // padding:10
+  },
+  TitleCont:{
+    marginVertical:20
   },
   Button:{
     backgroundColor:'red',

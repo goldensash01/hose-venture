@@ -30,7 +30,7 @@ export default function index() {
   
   // setIsLoggedIn(false);
   return (
-    <Redirect href={"/Authentication/Login"}/>      
+    <Redirect href={"/Authentication/welcome"}/>      
     // isLoggedIn?<Redirect href={"/Home/HomePage"}/>:<Redirect href={"/Authentication/Login"}/>      
     // isLoggedIn?console.log(userId):console.log(userId)
     // console.log(isLoggedIn,userId)

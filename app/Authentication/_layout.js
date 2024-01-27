@@ -12,6 +12,16 @@ export default ()=>{
         headerShown:false,
         }}
         />
+        <Stack.Screen 
+        name="welcome" options={{
+        headerShown:false,
+        }}
+        />
+        <Stack.Screen 
+        name="subscription" options={{
+        headerShown:false,
+        }}
+        />
         </Stack>
     )
 };

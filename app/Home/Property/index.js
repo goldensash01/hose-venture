@@ -96,11 +96,11 @@ export default function Notifications() {
               </View>
               <View style={styles.topNavigationMenu2}>
                 <Pressable style={styles.topNavMenuBtnActive}>
-                <FontAwesome name="home" size={24} color="#fff" />
+                <MaterialIcons name="person" size={24} color="#fff" />
                 <Text  style={styles.topNavMenuBtnTextActive}> Own</Text>
                 </Pressable>
                 <Pressable style={styles.topNavMenuBtn}>
-                <MaterialIcons name="apartment" size={24} color="#000" />
+                <Ionicons name="key" size={24} color="black" />
                 <Text style={styles.topNavMenuBtnText}> Rent</Text>
                 </Pressable>
                 
