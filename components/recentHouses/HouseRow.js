@@ -33,10 +33,10 @@ export default function HouseRow({Title,Location,houseImage,housePrice,rating,on
 const styles = StyleSheet.create({
   childComponentCont: {
     display: "flex",
-    justifyContent: "center",
+    justifyContent: "space-evenly",
     flexDirection:'row',
     alignItems: "center",
-    // width: 150,
+    width: '100%',
   },
   childNames:{
     textTransform:'capitalize',
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   },
   childComponent: {
     height: 120,
-    width: 190,
+    width: 180,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",

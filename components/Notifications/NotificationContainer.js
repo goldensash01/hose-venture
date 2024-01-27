@@ -4,11 +4,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from '@expo/vector-icons';
 
 export default function NotificationContainer({
-  fName,
-  lName,
-  Date,
-  TimeIn,
-  TimeOut,
+  fullname,reviewDate,stars,reviewDescription
 }) {
   return (
     <View style={styles.NotificationContainer}>
@@ -19,21 +15,21 @@ export default function NotificationContainer({
           </View>
           <View>
             <Text style={styles.reviewOwner}>
-              Golden Sash Munyankindi{fName} {lName}
+              {fullname}
             </Text>
             <Text style={styles.dateReviewed}>
-              2 Month ago{fName} {lName}
+              {reviewDate}
             </Text>
           </View>
         </View>
         <View>
           <Text style={styles.StudentNames}>
-          <Ionicons name="star" size={15} color="gold" /> 7/10
+          <Ionicons name="star" size={15} color="gold" /> {stars}
           </Text>
         </View>
       </View>
       <View style={styles.Description}>
-        <Text>Upon entering the rented house, I couldn't help but be captivated by its charming character and cozy atmosphere. The exterior exuded a welcoming aura with its well-maintained garden and a quaint porch that seemed perfect for enjoying a morning coffee.</Text>
+        <Text>{reviewDescription}</Text>
       </View>
     </View>
   );
@@ -43,7 +39,8 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderColor:'#000',
     borderWidth:1,
-    margin: 10,
+    marginHorizontal: 10,
+    marginBottom: 5,
     padding: 10,
   },
   TimeInTimeOut: {

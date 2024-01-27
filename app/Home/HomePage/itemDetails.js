@@ -5,7 +5,8 @@ import {
   ScrollView,
   ActivityIndicator,
   Image,
-  StatusBar
+  StatusBar,
+  FlatList
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
@@ -21,28 +22,37 @@ import { AntDesign } from '@expo/vector-icons';
 export default function ItemDetails() {
   const router = useRouter();
   const {HouseId} = useLocalSearchParams();
+  const GET_HOUSE_REVIEW="https://hoseventuresapi.verta.rw/reviewHouses/getSingleHouseReview.php"
   const GET_HOUSE =
     "https://hoseventuresapi.verta.rw/houses/getSingleHouse.php";
   //   const REMOVE_CHILD="https://api.schoolflow.rw/students/deleteStudent.php";
 
   const [houseData, setHouseData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [houseReview, setHouseReview] = useState(false);
   const { StudentId, ParentId } = useLocalSearchParams();
 
-  // const DeleteChild = async ()=>{
-  //   try{
-  //   const response= await axios.post(GET_HOUSE,{
-  //     houseId:9
-  //   });
-  //   if (response.status == 204) {
-  //     // router.replace("Home/HomePage/");
-  //   } else {
-  //     Alert.alert("Student Not Removed");
-  //   }
-  //     }catch(error){
-  //       console.log(error)
-  //     }
-  // }
+  const getHouseReview = async () => {
+    try {
+      setLoading(true);
+      const UpdateResponse = await axios.post(GET_HOUSE_REVIEW, {
+        houseId: HouseId,
+      });
+      if (UpdateResponse.status == 200) {
+        setHouseReview(UpdateResponse.data.data);
+        console.log(UpdateResponse.data.data);
+        
+      } else {
+        setHouseReview(null);
+        console.log('not found')
+      }
+    } catch (error) {
+      console.log(error);
+      console.log("Error on Latest update");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const getSingleHouse = async () => {
     try {
@@ -54,7 +64,8 @@ export default function ItemDetails() {
       if (response.status === 200) {
         // console.log(response.data);
         setHouseData(response.data.data);
-
+        // console.log(HouseId);
+        
         // console.log(houseData);
       } else {
         Alert.alert("no data found");
@@ -68,8 +79,9 @@ export default function ItemDetails() {
     }
   };
   useEffect(() => {
+    getHouseReview()
     getSingleHouse();
-  }, []);
+  }, [HouseId]);
   return (
     // <View></View>
     <ScrollView>
@@ -149,7 +161,23 @@ export default function ItemDetails() {
           <Text style={styles.Title}>Ratings</Text>
         </View>
         <View>
-          <NotificationContainer />
+          {houseReview?
+        <FlatList
+                  style={styles.housesContainer}
+                  horizontal={false}
+                  data={houseReview}
+                  keyExtractor={(item) => item.ReviewId.toString()}
+                  renderItem={({ item }) => (
+                    
+                    <NotificationContainer
+                    fullname={item.FullName}
+                    reviewDate={item.ReviewDate}
+                      stars={item.Stars}
+                      reviewDescription={item.Review}
+                    />
+                  )}
+                />:<Text style={styles.Nocontents}>No Reviews yet</Text>}
+          {/* <NotificationContainer /> */}
         </View>
         <View>
           <Text style={styles.Title}>House Owner</Text>
@@ -164,6 +192,14 @@ const styles = StyleSheet.create({
     padding: 10,
     marginTop:10,
     marginBottom:40
+  },
+  Nocontents: {
+    padding: 10,
+    marginHorizontal:10,
+    color:'#fff',
+    fontWeight:'bold',
+    // marginBottom:40,
+    backgroundColor:'#D43E27'
   },
   StudentNames: {
     padding: 5,
