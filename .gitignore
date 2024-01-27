@@ -33,9 +33,9 @@ local.properties
 
 # node.js
 #
-app/Authentication/
-app/Home/
-assets/
+# app/Authentication/
+# app/Home/
+# assets/
 node_modules/
 npm-debug.log
 yarn-error.log

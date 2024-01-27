@@ -27,6 +27,9 @@
     "extra": {
       "router": {
         "origin": false
+      },
+      "eas": {
+        "projectId": "49b159c8-5818-48fc-a50a-70825ed58a99"
       }
     },
     "android": {
@@ -35,6 +38,13 @@
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#ffffff"
       }
+    },
+    "owner": "golden_sash",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/49b159c8-5818-48fc-a50a-70825ed58a99"
     }
   }
 }
