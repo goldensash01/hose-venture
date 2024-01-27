@@ -8,6 +8,7 @@ export default function TransactionCard({pName,sName,date,amount}) {
     <View style={styles.NotificationContainer}>
           <View style={styles.titleGroup}>
             <View style={styles.StudentNamesIcon}><MaterialCommunityIcons name="bank-transfer" size={24} color="white" /></View>
+            
           </View>
           
           <View style={styles.textGroup1}>

@@ -17,15 +17,13 @@ import axios from "axios";
 import ProfileInputs from "../../../components/Inputs/inputs";
 
 
-PROFILE_INFO = "https://api.schoolflow.rw/account/profile.php";
+PROFILE_INFO = "https://hoseventuresapi.verta.rw/users/getSingleUser.php";
 
 export default function Account() {
   const router = useRouter();
   const [profileInfo, setProfileInfo] = useState([]);
   const [redirectLoading, setRedirectLoading] = useState(true);
-  // const [parentId, setParentId] = useState(null);  // Initialize parentId as null
   const [loading, setLoading] = useState(false);
-  const [username, setUsername] = useState('Golden Sash');
 
   const getUserId = async () => {
     try {
@@ -55,7 +53,6 @@ export default function Account() {
       });
       if (Response.status == 200) {
         setProfileInfo(Response.data.data);
-        console.log(Response.data.data);
       } else {
         setProfileInfo(null);
         Alert.alert("no data found");
@@ -69,7 +66,7 @@ export default function Account() {
   };
   useEffect(() => {
     GetUserInfo();
-    console.log(parentId)
+    // console.log(parentId)
   }, [parentId]);
   return (
     (  loading?<ActivityIndicator/>:
@@ -79,44 +76,40 @@ export default function Account() {
       <View style={styles.Title}>
         <View style={styles.ProfileImageContainer}>
           <View>
-          <Image source={require('../../../assets/houses/1.jpg')}
+          <Image source={{uri:`https://hoseventuresapi.verta.rw/images/profile/${profileInfo.ImgName}`}}
           style={styles.ProfileImage}
           />
           </View>
           <View>
-            <Text style={styles.username}>Username{profileInfo.creationDate}</Text>
-            <Text style={styles.UserId}>Joined</Text>
+            <Text style={styles.username}>{profileInfo.FullName}</Text>
+            <Text style={styles.UserId}>{profileInfo.UniqueId}</Text>
           </View>
         </View>
       </View>
       <View style={styles.ProfileData}>
       <View>
         <ProfileInputs
-        inputIcon="user"  Placeholder="Full name" 
-        // value={'Golden Sash Munyankindi'} 
-        // inputPlaceholder={'golden sash'}
+        inputIcon="user"  Placeholder="Full name" size="14"
         InputConfiguration={{ 
-          value:'golden',
+          value:profileInfo.FullName,
           editable:false
         }}
         />
       </View>
       <View>
         <ProfileInputs
-        inputIcon="envelope"  Placeholder="Full name" 
-        // value={'Golden Sash Munyankindi'} 
-        // inputPlaceholder={'golden sash'}
+        inputIcon="envelope"  Placeholder="Email" size="14"
         InputConfiguration={{ 
-          value:'golden',
+          value:profileInfo.Email,
           editable:false
         }}
         />
       </View>
       <View>
         <ProfileInputs
-        inputIcon="phone"  Placeholder="Full name" 
+        inputIcon="phone"  Placeholder="Phone number" size="14"
         InputConfiguration={{ 
-          value:'golden',
+          value:profileInfo.Phone,
           editable:false
         }}
         />
@@ -128,7 +121,6 @@ export default function Account() {
       </View>
       </View>
       
-      {/* </View> */}
     </ScrollView>
   )
   );

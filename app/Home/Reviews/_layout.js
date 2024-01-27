@@ -7,5 +7,10 @@ export default ()=>{
         headerShown:false,
         }}
         />
+        <Stack.Screen 
+        name="addReview" options={{
+        headerShown:false,
+        }}
+        />
     </Stack> 
 }

@@ -5,7 +5,7 @@ export default ()=>{
         <Stack.Screen 
         name="index"
         options={{
-        presentation:'modal',
+        // presentation:'modal',
         headerShown:false,
         }}
         />

@@ -19,6 +19,8 @@ import Search from "../../../components/Inputs/Search";
 import axios from "axios";
 import HouseRow from "../../../components/recentHouses/HouseRow";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import SearchReview from "../../../components/Inputs/SearchReview";
 // import cons
 
 import { useState, useEffect } from "react";
@@ -99,18 +101,21 @@ export default function Notifications() {
                 <FontAwesome name="home" size={24} color="#fff" />
                 <Text  style={styles.topNavMenuBtnTextActive}> Check Tenant</Text>
                 </Pressable>
-                <Pressable style={styles.topNavMenuBtn}>
-                <MaterialIcons name="apartment" size={24} color="#000" />
+                <Pressable onPress={()=>router.push('Home/Reviews/addReview')} style={styles.topNavMenuBtn}>
+                <MaterialCommunityIcons name="comment-edit-outline" size={24} color="#000" />
                 <Text style={styles.topNavMenuBtnText}> Add Review</Text>
                 </Pressable>
                 
               </View>
               <View style={styles.topNavigationMenu3}>
-                <Text style={styles.menu3Text} >My Houses</Text>
-                <Text style={styles.menu3TextLink}>See All</Text>
+                <SearchReview
+                onPress={()=>console.log('hiii')}
+                inputIcon="search"
+                Placeholder={'Enter Tenant Id'}
+                />
               </View>
               <View>
-              <HouseRow/>
+              {/* <HouseRow/> */}
               </View>
             </View>
           );
